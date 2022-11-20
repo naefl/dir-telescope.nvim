@@ -64,7 +64,7 @@ M.get_dirs = function(opts, fn)
 		time.time_start("get_dirs")
 	end
 
-	local find_command = (function()
+	local find_command =  (function()
 		if opts.find_command then
 			if type(opts.find_command) == "function" then
 				return opts.find_command(opts)
