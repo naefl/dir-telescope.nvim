@@ -64,7 +64,7 @@ M.get_dirs = function(opts, fn)
 		time.time_start("get_dirs")
 	end
 
-	local find_command =  (function()
+	local find_command = (function()
 		if opts.find_command then
 			if type(opts.find_command) == "function" then
 				return opts.find_command(opts)
@@ -134,6 +134,11 @@ M.get_dirs = function(opts, fn)
 									end
 								end
 								actions._close(prompt_bufnr, current_picker.initial_mode == "insert")
+								-- cd if dirs only has one selected entry
+								-- user has config cd option set
+								if #dirs == 1 and opts.cd then
+									vim.cmd("cd " .. dirs[1])
+								end
 								fn({ search_dirs = dirs })
 							end)
 							return true
